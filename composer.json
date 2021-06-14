@@ -1,17 +1,17 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "wvandeweyer/tall-flash",
+    "description": "This is my package Flash",
     "keywords": [
-        ":vendor_name",
+        "wvandeweyer",
         "laravel",
-        "package_slug"
+        "tall-flash"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/wvandeweyer/tall-flash",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Wim Vandeweyer",
+            "email": "wim@wimvandeweyer.be",
             "role": "Developer"
         }
     ],
@@ -30,13 +30,16 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
-        }
+            "Wvandeweyer\\Flash\\": "src",
+            "Wvandeweyer\\Flash\\Database\\Factories\\": "database/factories"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Wvandeweyer\\Flash\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +53,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Wvandeweyer\\Flash\\FlashServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "Flash": "Wvandeweyer\\Flash\\FlashFacade"
             }
         }
     },

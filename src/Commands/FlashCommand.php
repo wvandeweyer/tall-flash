@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Wvandeweyer\Flash\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FlashCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'tall-flash';
 
     public $description = 'My command';
 

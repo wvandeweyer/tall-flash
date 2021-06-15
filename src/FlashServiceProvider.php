@@ -2,22 +2,35 @@
 
 namespace Wvandeweyer\Flash;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Wvandeweyer\Flash\Commands\FlashCommand;
+use BladeUI\Icons\Factory;
+use Illuminate\Support\ServiceProvider;
 
-class FlashServiceProvider extends PackageServiceProvider
+class FlashServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function boot()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('flash')
-            ->hasConfigFile()
-            ->hasViews();
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'flash');
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/flash'),
+            ], 'views');
+
+            $this->publishes([
+                __DIR__.'/../config/flash.php' => config_path('flash.php'),
+            ], 'config');
+        }
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/flash.php', 'flash');
+
+        // $this->callAfterResolving(Factory::class, function (Factory $factory) {
+        //     $factory->add('google-material-design-icon', [
+        //         'path' => __DIR__.'/../vendor/codeat3/blade-google-material-design-icons/resources/svg',
+        //         'prefix' => 'gmdi',
+        //     ]);
+        // });
     }
 }

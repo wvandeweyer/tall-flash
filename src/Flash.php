@@ -4,16 +4,11 @@ namespace Wvandeweyer\Flash;
 
 use Illuminate\Contracts\Session\Session;
 
-/** @mixin \Spatie\Flash\Message */
+/** @mixin \Wvandeweyer\Flash\Message */
 class Flash
 {
-    protected Session $session;
-    public $message;
-
-    public function __construct(Session $session, Message $message)
+    public function __construct(protected Session $session, public Message $message)
     {
-        $this->session = $session;
-        $this->message = $message;
     }
 
     public function __get(string $name)
@@ -33,6 +28,7 @@ class Flash
         return new Message(
             $flashedMessageProperties['content'],
             $flashedMessageProperties['level'],
+            $flashedMessageProperties['dismissable'],
         );
     }
 
@@ -76,6 +72,13 @@ class Flash
         if ($content) {
             $this->message->content = $content;
         }
+
+        return $this;
+    }
+
+    public function dismissable()
+    {
+        $this->message->dismissable = true;
 
         return $this;
     }

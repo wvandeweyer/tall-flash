@@ -7,6 +7,7 @@ class Message
     public function __construct(
         public string $content = '',
         public string $level = 'info',
+        public bool $dismissable = false,
     ) {
     }
 
@@ -15,6 +16,7 @@ class Message
         return [
             'content' => $this->content,
             'level' => $this->level,
+            'dismissable' => $this->dismissable,
         ];
     }
 }

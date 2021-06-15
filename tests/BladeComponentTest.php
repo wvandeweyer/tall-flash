@@ -2,14 +2,22 @@
 
 namespace Wvandeweyer\Flash\Tests;
 
-use Illuminate\Http\Request;
-use PHPUnit\Framework\TestCase;
-use Mockery as m;
-use Illuminate\Routing\Route;
-use Illuminate\Routing\RouteCollection;
-use Illuminate\Routing\UrlGenerator;
-use Illuminate\Contracts\View\Factory;
+use NunoMaduro\LaravelMojito\InteractsWithViews;
 
 class BladeComponentTest extends TestCase
 {
+    use InteractsWithViews;
+
+    /**
+     * @test
+     *
+     * @dataProvider notificationTypes
+     */
+    public function it_displays_the_message_content($type)
+    {
+        $content = 'Hello World';
+
+        flash()->$type($content)->echo();
+        $this->assertView('flash::flash-message')->contains($content);
+    }
 }

@@ -29,4 +29,14 @@ class FlashTest extends TestCase
 
         $this->assertEquals('hello world', flash()->content);
     }
+
+
+    /**
+     * @test
+     */
+    public function a_message_can_be_dismissable()
+    {
+        flash()->dismissable()->echo();
+        $this->assertEquals(true, flash()->dismissable);
+    }
 }

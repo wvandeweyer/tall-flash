@@ -14,14 +14,14 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium {{ $styles['text-color'] }}">
-                        {{ flash()->content }}
+                        {!! flash()->content !!}
                     </p>
                 </div>
                 @if(flash()->dismissable)
                 <div class="pl-3 ml-auto">
                     <div class="-mx-1.5 -my-1.5">
                         <button type="button" x-on:click="isShowing = false"
-                            class="inline-flex {{ $styles['dismissable-bg-color'] }} rounded-md p-1.5 {{ $styles['dimissable-icon-color'] }} hover:{{ $styles['dismissable-bg-color-hover'] }} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-{{ $getAlertColor() }}-50 focus:ring-{{ $getAlertColor() }}-600">
+                            class="inline-flex {{ $styles['dismissable-bg-color'] }} rounded-md p-1.5 {{ $styles['dismissable-icon-color'] }} hover:{{ $styles['dismissable-bg-color-hover'] }} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-{{ $styles['dismissable-icon-color'] }} focus:ring-{{ $styles['dismissable-icon-color'] }}">
                             <span class="sr-only">Dismiss</span>
                             <x-flash::icons.close class="w-5 h-5" />
                         </button>
@@ -30,7 +30,6 @@
                 @endif
             </div>
         </div>
-
     </div>
     @endif
 </div>

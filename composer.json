@@ -43,7 +43,11 @@
     "scripts": {
         "psalm": "vendor/bin/psalm",
         "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "test:coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --color=always --coverage-clover=\"output/code-coverage/clover.xml\""
+          ]
     },
     "config": {
         "sort-packages": true
@@ -52,10 +56,7 @@
         "laravel": {
             "providers": [
                 "Wvandeweyer\\Flash\\FlashServiceProvider"
-            ],
-            "aliases": {
-                "Flash": "Wvandeweyer\\Flash\\FlashFacade"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

@@ -4,7 +4,7 @@ namespace Wvandeweyer\Flash;
 
 use Illuminate\Contracts\Session\Session;
 
-/** @mixin \Wvandeweyer\Flash\Message */
+/** @mixin \Wvandeweyer\Flash\Flash */
 class Flash
 {
     public function __construct(protected Session $session, public Message $message)
@@ -40,6 +40,8 @@ class Flash
             $this->message->content = $content;
         }
 
+        $this->saveToSession();
+
         return $this;
     }
 
@@ -50,6 +52,8 @@ class Flash
         if ($content) {
             $this->message->content = $content;
         }
+
+        $this->saveToSession();
 
         return $this;
     }
@@ -62,6 +66,8 @@ class Flash
             $this->message->content = $content;
         }
 
+        $this->saveToSession();
+
         return $this;
     }
 
@@ -73,17 +79,20 @@ class Flash
             $this->message->content = $content;
         }
 
+        $this->saveToSession();
+
         return $this;
     }
 
     public function dismissable()
     {
         $this->message->dismissable = true;
+        $this->saveToSession();
 
         return $this;
     }
 
-    public function echo()
+    public function saveToSession()
     {
         return $this->session->flash('laravel_flash_message', $this->message->toArray());
     }

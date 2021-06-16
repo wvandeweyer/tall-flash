@@ -17,7 +17,16 @@ class BladeComponentTest extends TestCase
     {
         $content = 'Hello World';
 
-        flash()->$type($content)->echo();
+        flash()->$type($content);
         $this->assertView('flash::flash-message')->contains($content);
+    }
+
+    /** @test */
+    public function it_displays_the_dismiss_icon_if_dismissible()
+    {
+        $content = 'Hello World';
+
+        flash()->success($content)->dismissable();
+        $this->assertView('flash::flash-message')->contains('Dismiss');
     }
 }

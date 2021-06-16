@@ -2,7 +2,6 @@
 
 namespace Wvandeweyer\Flash;
 
-use BladeUI\Icons\Factory;
 use Illuminate\Support\ServiceProvider;
 
 class FlashServiceProvider extends ServiceProvider
@@ -25,12 +24,5 @@ class FlashServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/flash.php', 'flash');
-
-        // $this->callAfterResolving(Factory::class, function (Factory $factory) {
-        //     $factory->add('google-material-design-icon', [
-        //         'path' => __DIR__.'/../vendor/codeat3/blade-google-material-design-icons/resources/svg',
-        //         'prefix' => 'gmdi',
-        //     ]);
-        // });
     }
 }

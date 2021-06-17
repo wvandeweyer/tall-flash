@@ -1,4 +1,4 @@
-# This is my package Flash
+# TALL Stack Flash Notification
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wvandeweyer/tall-flash.svg?style=flat-square)](https://packagist.org/packages/wvandeweyer/tall-flash)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wvandeweyer/tall-flash/run-tests?label=tests)](https://github.com/wvandeweyer/tall-flash/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -6,24 +6,62 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/wvandeweyer/tall-flash.svg?style=flat-square)](https://packagist.org/packages/wvandeweyer/tall-flash)
 
 ---
-This repo can be used as to scaffold a Laravel package. Follow these steps to get started:
+This is a package to send flash messages in a Laravel app via either the session storage or via Livewire.
 
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this tall-flash
-2. Run "./configure-tall-flash.sh" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
+## Usage 
+
+Usage via session storage
+
+```php
+class MyAwesomeController
+{
+    public function store()
+    {
+        // ......
+        flash()->success('Hooray, we have saved your input');
+        // ....
+    }
+}
+```
+
+
+
+## Livewire Flash Message
+
+To flash a message via Livewire, you must chain ```livewire($this)```. This will emit the information to the Flash notification component.
+
+```php
+public function livewireMethod()
+{
+    flash()->info('I want to share this info message.')->livewire($this);
+}
+```
+
+
+
+## Display Messages
+
+You can display the messages by including this Livewire component in your template. It will display messages stored in the session, as well as messages emitted via Livewire.
+
+```blade
+<livewire:flash-container />
+```
+
+## Message types
+
+By default following levels are defined
+
+- info
+- error
+- warning
+- success
+
+## Dismissable Messages
+
+Messages can be dismissed when chaining ```dismissable()``` 
+The package uses AlpineJS to hide the message in this case.
+
 ---
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/tall-flash.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/tall-flash)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
@@ -33,30 +71,54 @@ You can install the package via composer:
 composer require wvandeweyer/tall-flash
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Wvandeweyer\Flash\FlashServiceProvider" --tag="tall-flash-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Wvandeweyer\Flash\FlashServiceProvider" --tag="tall-flash-config"
+php artisan vendor:publish --provider="Wvandeweyer\Flash\FlashServiceProvider"
 ```
 
 This is the contents of the published config file:
 
 ```php
 return [
+    'sessionKey' => 'flash_message',
+    'styles' => [
+        'info' => [
+            'bg-color' => 'bg-blue-50',
+            'icon-color' => 'text-blue-400',
+            'text-color' => 'text-blue-600',
+            'icon' => 'info',
+            'dismissable-bg-color' => 'bg-blue-50',
+            'dismissable-bg-color-hover' => 'bg-blue-100',
+            'dismissable-icon-color' => 'bg-blue-500',
+        ],
+        'success' => [
+            'bg-color'     => 'bg-green-50',
+            'icon-color'   => 'text-green-400',
+            'text-color'   => 'text-green-600',
+            'icon'         => 'check',
+            'dismissable-bg-color' => 'bg-green-50',
+            'dismissable-bg-color-hover' => 'bg-green-100',
+            'dismissable-icon-color' => 'bg-green-500',
+        ],
+        'warning' => [
+            'bg-color'     => 'bg-yellow-50',
+            'icon-color'   => 'text-yellow-400',
+            'text-color'   => 'text-yellow-600',
+            'icon'         => 'warning',
+            'dismissable-bg-color' => 'bg-yellow-50',
+            'dismissable-bg-color-hover' => 'bg-yellow-100',
+            'dismissable-icon-color' => 'bg-yellow-500',
+        ],
+        'error' => [
+            'bg-color'     => 'bg-red-50',
+            'icon-color'   => 'text-red-400',
+            'text-color'   => 'text-red-600',
+            'icon'         => 'error',
+            'dismissable-bg-color' => 'bg-red-50',
+            'dismissable-bg-color-hover' => 'bg-red-100',
+            'dismissable-icon-color' => 'bg-red-500',
+        ],
 ];
-```
-
-## Usage
-
-```php
-$tall-flash = new Wvandeweyer\Flash();
-echo $tall-flash->echoPhrase('Hello, Spatie!');
 ```
 
 ## Testing

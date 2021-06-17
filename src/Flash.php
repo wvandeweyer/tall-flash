@@ -2,7 +2,9 @@
 
 namespace Wvandeweyer\Flash;
 
+use BadMethodCallException;
 use Illuminate\Contracts\Session\Session;
+use Livewire\Component;
 
 /** @mixin \Wvandeweyer\Flash\Flash */
 class Flash
@@ -16,10 +18,9 @@ class Flash
         return $this->getMessage()->$name ?? null;
     }
 
-
     public function getMessage(): ?Message
     {
-        $flashedMessageProperties = $this->session->get('laravel_flash_message');
+        $flashedMessageProperties = $this->session->get(config('flash.sessionKey'));
 
         if (! $flashedMessageProperties) {
             return null;
@@ -32,59 +33,7 @@ class Flash
         );
     }
 
-    public function success(string $content) : Flash
-    {
-        $this->message->level = 'success';
-
-        if ($content) {
-            $this->message->content = $content;
-        }
-
-        $this->saveToSession();
-
-        return $this;
-    }
-
-    public function warning(string $content) : Flash
-    {
-        $this->message->level = 'warning';
-
-        if ($content) {
-            $this->message->content = $content;
-        }
-
-        $this->saveToSession();
-
-        return $this;
-    }
-
-    public function error(string $content) : Flash
-    {
-        $this->message->level = 'error';
-
-        if ($content) {
-            $this->message->content = $content;
-        }
-
-        $this->saveToSession();
-
-        return $this;
-    }
-
-    public function info(string $content) : Flash
-    {
-        $this->message->level = 'info';
-
-        if ($content) {
-            $this->message->content = $content;
-        }
-
-        $this->saveToSession();
-
-        return $this;
-    }
-
-    public function dismissable()
+    public function dismissable() : Flash
     {
         $this->message->dismissable = true;
         $this->saveToSession();
@@ -94,6 +43,33 @@ class Flash
 
     public function saveToSession()
     {
-        return $this->session->flash('laravel_flash_message', $this->message->toArray());
+        return $this->session->flash(config('flash.sessionKey'), $this->message->toArray());
+    }
+
+    public function livewire(Component $livewire) : Flash
+    {
+        $livewire->emit('flashMessageAdded', $this->message);
+
+        return $this;
+    }
+
+    /**
+     * Magic __call: pass the method name called as the message type if it is configured
+     */
+    public function __call(mixed $method, mixed $arguments) : Flash
+    {
+        if (!in_array($method, array_keys(config('flash.styles')))) {
+            throw new BadMethodCallException();
+        }
+
+        $this->message->level = $method;
+
+        if ($arguments[0]) {
+            $this->message->content = $arguments[0];
+        }
+
+        $this->saveToSession();
+
+        return $this;
     }
 }

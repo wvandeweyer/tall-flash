@@ -1,10 +1,10 @@
 @php   
-    $styles =  config('flash.styles.' . flash()->level);
+    $styles =  config('flash.styles.' . $level);
     $icon = 'flash::icons.' . $styles['icon'];
 @endphp
 
 <div>
-    @if(flash()->message)
+    @if($content)
     <div x-data="{ isShowing: true }">
         <div class="p-4 rounded-md {{ $styles['bg-color'] }}" role="alert" x-show="isShowing"
             x-transition:leave="transition duration-200 transform ease-in" x-transition:leave-end="opacity-0 scale-80">
@@ -14,10 +14,10 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium {{ $styles['text-color'] }}">
-                        {!! flash()->content !!}
+                        {!! $content !!}
                     </p>
                 </div>
-                @if(flash()->dismissable)
+                @if($dismissable)
                 <div class="pl-3 ml-auto">
                     <div class="-mx-1.5 -my-1.5">
                         <button type="button" x-on:click="isShowing = false"

@@ -1,5 +1,6 @@
 <?php
 return [
+    'sessionKey' => 'flash_message',
     'styles' => [
         'info' => [
             'bg-color' => 'bg-blue-50',

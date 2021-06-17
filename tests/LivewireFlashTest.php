@@ -5,8 +5,6 @@ namespace Wvandeweyer\Flash\Tests;
 use BadMethodCallException;
 use Livewire\Livewire;
 use Wvandeweyer\Flash\Livewire\FlashMessage;
-use Wvandeweyer\Flash\Message;
-use Wvandeweyer\Flash\Tests\LivewireTestCase;
 
 class LivewireFlashTest extends LivewireTestCase
 {

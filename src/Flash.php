@@ -58,7 +58,7 @@ class Flash
      */
     public function __call(mixed $method, mixed $arguments) : Flash
     {
-        if (!in_array($method, array_keys(config('flash.styles')))) {
+        if (! in_array($method, array_keys(config('flash.styles')))) {
             throw new BadMethodCallException();
         }
 

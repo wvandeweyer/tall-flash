@@ -2,8 +2,6 @@
 
 namespace Wvandeweyer\Flash\Tests;
 
-use Livewire\Component;
-use Livewire\Livewire;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Wvandeweyer\Flash\FlashServiceProvider;

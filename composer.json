@@ -4,7 +4,10 @@
     "keywords": [
         "wvandeweyer",
         "laravel",
-        "tall-flash"
+        "tall-flash",
+        "flash",
+        "notification",
+        "livewire"
     ],
     "homepage": "https://github.com/wvandeweyer/tall-flash",
     "license": "MIT",

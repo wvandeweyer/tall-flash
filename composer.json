@@ -1,6 +1,6 @@
 {
     "name": "wvandeweyer/tall-flash",
-    "description": "This is my package Flash",
+    "description": "Flash notifications using the TALL stack",
     "keywords": [
         "wvandeweyer",
         "laravel",

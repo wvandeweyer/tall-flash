@@ -54,7 +54,7 @@ The package uses AlpineJS to hide the message in this case.
 You can display the messages by including this Livewire component in your template. It will display messages stored in the session, as well as messages emitted via Livewire.
 
 ```blade
-<livewire:flash-container />
+<livewire:flash-message />
 ```
 
 

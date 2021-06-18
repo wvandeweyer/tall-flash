@@ -8,7 +8,6 @@ class Message
     public string $level;
     public ?bool $dismissable;
 
-
     public function __construct(
         string $content = '',
         string $level = 'info',

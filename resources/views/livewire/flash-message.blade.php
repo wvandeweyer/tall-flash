@@ -48,7 +48,7 @@
 
 <div>
     @if($content)
-    <div x-data="{ isShowing: true }">
+    <div x-data="{ open: @entangle('isShowing').defer }">
         <div class="p-4 rounded-md {{ $style['bg-color'] }}" role="alert" x-show="isShowing"
             x-transition:leave="transition duration-200 transform ease-in" x-transition:leave-end="opacity-0 scale-80">
             <div class="flex">

@@ -9,6 +9,7 @@ class FlashMessage extends Component
     public string $content;
     public string $level = 'info';
     public bool $dismissable = true;
+    public bool $isShowing = true;
 
     protected $listeners = ['flashMessageAdded'];
 
@@ -32,5 +33,6 @@ class FlashMessage extends Component
         $this->content = $message['content'];
         $this->level = $message['level'];
         $this->dismissable = $message['dismissable'];
+        $this->isShowing = true;
     }
 }

@@ -1,6 +1,8 @@
 @php   
     $styles =  config('flash.styles.' . $level);
     $icon = 'flash::icons.' . $styles['icon'];
+
+    $iconStyle = 'h-5 w-5 ' . $styles['icon-color'];
 @endphp
 
 <div>
@@ -10,7 +12,7 @@
             x-transition:leave="transition duration-200 transform ease-in" x-transition:leave-end="opacity-0 scale-80">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <x-dynamic-component :component="$icon" class="w-5 h-5" :class="$styles['icon-color']" />
+                    <x-dynamic-component :component="$icon" :class="$iconStyle" />
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium {{ $styles['text-color'] }}">

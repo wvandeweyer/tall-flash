@@ -28,10 +28,10 @@ class FlashMessage extends Component
         return view('flash::livewire.flash-message');
     }
 
-    public function flashMessageAdded(Message $message)
+    public function flashMessageAdded($message)
     {
-        $this->content = $message->content;
-        $this->level = $message->level;
-        $this->dismissable = $message->dismissable;
+        $this->content = $message['content'];
+        $this->level = $message['level'];
+        $this->dismissable = $message['dismissable'];
     }
 }

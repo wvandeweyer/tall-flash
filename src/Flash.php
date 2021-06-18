@@ -48,7 +48,7 @@ class Flash
 
     public function livewire(Component $livewire) : Flash
     {
-        $livewire->emit('flashMessageAdded', $this->message);
+        $livewire->emit('flashMessageAdded', $this->message->toArray());
 
         return $this;
     }

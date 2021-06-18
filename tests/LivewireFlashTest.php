@@ -40,22 +40,6 @@ class LivewireFlashTest extends LivewireTestCase
      *
      * @dataProvider notificationTypes
      */
-    public function it_can_diplay_the_correct_message_level($type)
-    {
-        $styles = config('flash.styles.' . $type);
-        flash()->$type('test');
-
-        Livewire::test(FlashMessage::class)
-            ->assertSet('level', $type)
-            ->assertSee($styles['bg-color'])
-            ->assertSee($styles['text-color']);
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider notificationTypes
-     */
     public function it_can_be_dismissed($type)
     {
         flash()->$type('test')->dismissable();

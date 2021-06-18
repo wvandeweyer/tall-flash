@@ -7,7 +7,7 @@ use Livewire\Livewire;
 
 class FlashServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot() : void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'flash');
 
@@ -24,7 +24,7 @@ class FlashServiceProvider extends ServiceProvider
         }
     }
 
-    public function register()
+    public function register() : void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/flash.php', 'flash');
     }

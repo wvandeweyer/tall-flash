@@ -43,6 +43,9 @@ class Flash
 
     public function saveToSession()
     {
+        /**
+        * @psalm-suppress UndefinedInterfaceMethod
+        */
         return $this->session->flash(config('flash.sessionKey'), $this->message->toArray());
     }
 

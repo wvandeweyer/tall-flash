@@ -3,7 +3,6 @@
 namespace Wvandeweyer\Flash\Livewire;
 
 use Livewire\Component;
-use Wvandeweyer\Flash\Message;
 
 class FlashMessage extends Component
 {

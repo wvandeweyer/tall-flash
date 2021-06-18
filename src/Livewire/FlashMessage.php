@@ -3,13 +3,12 @@
 namespace Wvandeweyer\Flash\Livewire;
 
 use Livewire\Component;
-use Wvandeweyer\Flash\Message;
 
 class FlashMessage extends Component
 {
     public string $content;
     public string $level = 'info';
-    public bool $dismissable = false;
+    public bool $dismissable = true;
 
     protected $listeners = ['flashMessageAdded'];
 
@@ -18,7 +17,7 @@ class FlashMessage extends Component
         // grab any normal flash messages and render them
         $this->content = flash()->content ?? '';
         $this->level = flash()->level ?? 'info';
-        $this->dismissable = flash()->dismissable ?? false;
+        $this->dismissable = flash()->dismissable ?? true;
 
         session()->forget(config('flash.sessionKey'));
     }

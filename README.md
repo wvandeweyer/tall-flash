@@ -39,6 +39,16 @@ public function livewireMethod()
 
 
 
+## Dismissable Messages
+
+Messages can be dismissible when chaining ```dismissable()``` or not dismissable by chaining ```notDismissable()``` or ```dismissable(false)```  
+
+By default the messages will be dismissable. The default can be changed by publising the config file and changing the defaults.dismissable value.
+
+The package uses AlpineJS to hide the message in this case.
+
+
+
 ## Display Messages
 
 You can display the messages by including this Livewire component in your template. It will display messages stored in the session, as well as messages emitted via Livewire.
@@ -47,19 +57,20 @@ You can display the messages by including this Livewire component in your templa
 <livewire:flash-container />
 ```
 
+
+
 ## Message types
 
-By default following levels are defined
+By default following levels are defined, but can be changed in the config file.
 
 - info
 - error
 - warning
 - success
 
-## Dismissable Messages
+When adding a level, you must also update the view ```flash-message.blade.php``` . The styles are included in the blade file for the sole reason Tailwind will scan it when purging classes.
 
-Messages can be dismissed when chaining ```dismissable()``` 
-The package uses AlpineJS to hide the message in this case.
+
 
 ---
 
@@ -76,50 +87,7 @@ You can publish the config file with:
 php artisan vendor:publish --provider="Wvandeweyer\Flash\FlashServiceProvider"
 ```
 
-This is the contents of the published config file:
 
-```php
-return [
-    'sessionKey' => 'flash_message',
-    'styles' => [
-        'info' => [
-            'bg-color' => 'bg-blue-50',
-            'icon-color' => 'text-blue-400',
-            'text-color' => 'text-blue-600',
-            'icon' => 'info',
-            'dismissable-bg-color' => 'bg-blue-50',
-            'dismissable-bg-color-hover' => 'bg-blue-100',
-            'dismissable-icon-color' => 'bg-blue-500',
-        ],
-        'success' => [
-            'bg-color'     => 'bg-green-50',
-            'icon-color'   => 'text-green-400',
-            'text-color'   => 'text-green-600',
-            'icon'         => 'check',
-            'dismissable-bg-color' => 'bg-green-50',
-            'dismissable-bg-color-hover' => 'bg-green-100',
-            'dismissable-icon-color' => 'bg-green-500',
-        ],
-        'warning' => [
-            'bg-color'     => 'bg-yellow-50',
-            'icon-color'   => 'text-yellow-400',
-            'text-color'   => 'text-yellow-600',
-            'icon'         => 'warning',
-            'dismissable-bg-color' => 'bg-yellow-50',
-            'dismissable-bg-color-hover' => 'bg-yellow-100',
-            'dismissable-icon-color' => 'bg-yellow-500',
-        ],
-        'error' => [
-            'bg-color'     => 'bg-red-50',
-            'icon-color'   => 'text-red-400',
-            'text-color'   => 'text-red-600',
-            'icon'         => 'error',
-            'dismissable-bg-color' => 'bg-red-50',
-            'dismissable-bg-color-hover' => 'bg-red-100',
-            'dismissable-icon-color' => 'bg-red-500',
-        ],
-];
-```
 
 ## Testing
 
@@ -127,22 +95,32 @@ return [
 composer test
 ```
 
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+
 
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
+
+
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security related issues, please email wim@wimvandeweyer.be instead of using the issue tracker.
+
+
 
 ## Credits
 
 - [Wim Vandeweyer](https://github.com/wvandeweyer)
 - [All Contributors](../../contributors)
+
+
 
 ## License
 

@@ -33,10 +33,17 @@ class Flash
         );
     }
 
-    public function dismissable() : Flash
+    public function dismissable(bool $dismissable = true) : Flash
     {
-        $this->message->dismissable = true;
+        $this->message->dismissable = $dismissable;
         $this->saveToSession();
+
+        return $this;
+    }
+
+    public function notDismissable() : Flash
+    {
+        $this->dismissable(false);
 
         return $this;
     }

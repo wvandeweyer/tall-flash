@@ -3,6 +3,7 @@
 namespace Wvandeweyer\Flash\Tests;
 
 use BadMethodCallException;
+use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
 use Wvandeweyer\Flash\Livewire\FlashMessage;
 
@@ -45,7 +46,7 @@ class LivewireFlashTest extends LivewireTestCase
         flash()->$type('test')->dismissable();
 
         Livewire::test(FlashMessage::class)
-            ->assertSet('level', $type)
+            ->assertSet('dismissable', true)
             ->assertSee('Dismiss');
     }
 
@@ -56,10 +57,10 @@ class LivewireFlashTest extends LivewireTestCase
      */
     public function it_cannot_be_dismissed($type)
     {
-        flash()->$type('test');
+        flash()->$type('test')->dismissable(false);
 
         Livewire::test(FlashMessage::class)
-            ->assertSet('level', $type)
+            ->assertSet('dismissable', false)
             ->assertDontSee('Dismiss');
     }
 
@@ -70,5 +71,31 @@ class LivewireFlashTest extends LivewireTestCase
     {
         $this->expectException(BadMethodCallException::class);
         flash()->unkown('test');
+    }
+
+    /**
+     * @test
+     */
+    public function it_is_dismissable_by_default()
+    {
+        flash()->success('test');
+
+        Livewire::test(FlashMessage::class)
+            ->assertSet('dismissable', true)
+            ->assertSee('Dismiss');
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_change_the_default_dismissability_via_the_config()
+    {
+        Config::set('flash.defaults.dismissable', false);
+
+        flash()->success('test');
+
+        Livewire::test(FlashMessage::class)
+            ->assertSet('dismissable', false)
+            ->assertDontSee('Dismiss');
     }
 }
